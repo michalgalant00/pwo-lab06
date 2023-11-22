@@ -5,20 +5,48 @@ import pwo.utils.SequenceTools;
 import java.nio.file.Paths;
 import java.nio.file.InvalidPathException;
 
+/**
+ * Klasa aplikacji generującej i zapisującej ciąg liczbowy do pliku. Obsługuje
+ * argumenty przekazane z linii poleceń.
+ *
+ * @author michal
+ * @version 1.0.0
+ */
 class SeqToFileApp {
 
+    /**
+     * Typ ciągu do wygenerowania.
+     */
     protected SeqType seqType = null;
-    protected Integer from = null, to = null;
+
+    /**
+     * Początkowy indeks generowanego ciągu.
+     */
+    protected Integer from = null;
+
+    /**
+     * Końcowy indeks generowanego ciągu.
+     */
+    protected Integer to = null;
+
+    /**
+     * Nazwa pliku, do którego zapisywany będzie ciąg.
+     */
     protected String fileName = null;
 
+    /**
+     * Metoda parsująca argumenty przekazane z linii poleceń.
+     *
+     * @param args Tablica argumentów z linii poleceń.
+     * @return true jeżeli argumenty są poprawne, false w przeciwnym wypadku.
+     */
     protected boolean getArgs(String[] args) {
         try {
             seqType = SeqType.fromString(args[0]);
             from = Integer.parseInt(args[1]);
             to = Integer.parseInt(args[2]);
             fileName = args[3];
-        } catch (ArrayIndexOutOfBoundsException
-                | NumberFormatException ex) {
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
             return false;
         }
 
@@ -31,11 +59,22 @@ class SeqToFileApp {
         return seqType != null && from >= 0 && to >= 0;
     }
 
-    protected boolean wirteSeq() {
-        return SequenceTools.writeToFile(seqType.getGenerator(),
-                from, to, fileName);
+    /**
+     * Metoda zapisująca ciąg do pliku na podstawie wcześniej przekazanych
+     * argumentów.
+     *
+     * @return true jeżeli zapis do pliku powiódł się, false w przeciwnym
+     * wypadku.
+     */
+    protected boolean writeSeq() {
+        return SequenceTools.writeToFile(seqType.getGenerator(), from, to, fileName);
     }
 
+    /**
+     * Metoda uruchamiająca aplikację.
+     *
+     * @param args Tablica argumentów z linii poleceń.
+     */
     public void run(String[] args) {
         System.out.println("Sequence to file CLI app");
 
@@ -45,9 +84,8 @@ class SeqToFileApp {
             return;
         }
 
-        if (!wirteSeq()) {
-            System.out.println("!Write to the file: "
-                    + fileName + " FAILED");
+        if (!writeSeq()) {
+            System.out.println("!Write to the file: " + fileName + " FAILED");
             return;
         }
 

@@ -3,8 +3,12 @@ package pwo.app;
 import pwo.utils.SequenceTools;
 
 /**
+ * Klasa aplikacji generującej i wypisującej ciąg liczbowy na ekran konsoli.
+ * Obsługuje argumenty przekazane z linii poleceń. Rozszerza klasę
+ * {@link SeqToFileApp}.
  *
  * @author michal
+ * @version 1.0.0
  */
 public class SeqToOutApp extends SeqToFileApp {
 
@@ -19,7 +23,7 @@ public class SeqToOutApp extends SeqToFileApp {
     }
 
     @Override
-    protected boolean wirteSeq() {
+    protected boolean writeSeq() {
 
         System.out.println(SequenceTools.getTermsAsColumn(
                 seqType.getGenerator(), from, to));
@@ -38,7 +42,7 @@ public class SeqToOutApp extends SeqToFileApp {
             return;
         }
 
-        wirteSeq();
+        writeSeq();
 
     }
 }

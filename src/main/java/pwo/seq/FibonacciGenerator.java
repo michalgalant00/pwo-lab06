@@ -2,8 +2,18 @@ package pwo.seq;
 
 import java.math.BigDecimal;
 
+/**
+ * Klasa generująca wyrazy ciągu Fibonacciego. Rozszerza klasę abstrakcyjną
+ * {@link Generator}.
+ *
+ * @author michal
+ * @version 1.0.0
+ */
 public class FibonacciGenerator extends Generator {
 
+    /**
+     * Konstruktor inicjalizujący początkowe wartości ciągu Fibonacciego.
+     */
     public FibonacciGenerator() {
         current = new BigDecimal(0);
         f_1 = new BigDecimal(1);
